@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.card img{
+   width: 200px;
+   height: 400px;
+   margin-left: 50px;
+}
+.mr{
+    margin-left: 75px;
+    margin-top: 15px;
+}
+a {
+    text-decoration: none;
+}
