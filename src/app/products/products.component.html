@@ -1,19 +1,7 @@
 <div class="container-fluid">
-        <div class="row">
-
-            
-          <div  *ngFor="let item of productArr">
-            <div class="card" *ngIf="item.isAvailable"  style="width: 18rem; margin: 20px; height: 550px;">
-            <img src='{{item.image}}'  class="card-img-top" alt='{{item.imageAlt}}'>
-            
-              <h5 class="card-title">{{item.name |uppercase}}</h5>
-              <p class="card-text">{{item.description}}</p>
-              <p class="card-text">{{productArr.price}}</p>
-              <button href="#" class="btn btn-primary"  [disabled]="!item.isAvailable" >Add to cart</button>
-            </div>
-          </div> 
-
-
-
-        </div>
-        </div>
+  <div class="row" *ngIf='productList'>
+    <div *ngFor="let item of productList">
+      <app-productdetail [product]='item'></app-productdetail>
+    </div>
+  </div>
+</div>

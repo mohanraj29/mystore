@@ -1,0 +1,12 @@
+
+
+<div class="card"   style="width: 18rem; margin: 20px; height: 550px;">
+    <img src='{{product.imageUrl}}'  class="card-img-top" alt='{{product.imageAlt}}'>
+    
+     <a routerLink="/productdetail" routerLinkActive="active"><h5 class="card-title">{{product.title |uppercase}}</h5></a> 
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text">{{product?.price}}</p>
+      <button  class="btn btn-primary"  [disabled]="!product.isAvailable" >Add to cart</button>
+      <button  class="btn btn-success" [routerLink]="['/addproduct', product.id]" routerLinkActive="active">Edit</button>
+      <button  class="btn btn-success" [routerLink]="['/productdetail', product.id]" routerLinkActive="active">detail</button>
+    </div>
