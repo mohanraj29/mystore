@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ProductService } from '../service/product.service';
+
 
 
 @Component({
@@ -8,10 +10,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class ProductdetailComponent implements OnInit {
-  @Input(  )  product ;
-  constructor() {
+  @Input() product;
+  @Output() isDeleted = new EventEmitter();
+  productLiked = 0;
+  constructor(private service: ProductService) {
   }
   ngOnInit() {
   }
-
+  delete(id) {
+    this.service.del(id).subscribe(data => {
+      alert('product deleted successfully');
+      this.isDeleted.emit("");
+    });
+  }
+  cart() {
+    this.productLiked += 1;
+  }
 }
+

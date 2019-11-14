@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductService } from '../service/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -23,7 +23,8 @@ export class AddproductComponent implements OnInit {
   id: number;
   current: any;
   data: any;
-  constructor(private service: ProductService, private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private service: ProductService, private route: ActivatedRoute, private http: HttpClient,
+              private router: Router) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -41,6 +42,8 @@ export class AddproductComponent implements OnInit {
       console.log(this.id);
       this.current = this.service.filterProduct(this.id).subscribe(Response => {
         this.data = Response;
+        console.log('response', this.data);
+        
         this.myForm.patchValue({
           id: this.data.id,
           createdAt: this.data.createdAt,
@@ -60,22 +63,23 @@ export class AddproductComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
-    // console.log('Valid?', form.valid); // true or false
-    // console.log('Id', form.value.id);
-    // console.log('Name', form.value.image);
-    // console.log('description', form.value.description);
-    // console.log('imagealt', form.value.imageAlt);
-    // console.log('availability', form.value.availability);
-    // console.log('price', form.value.price);
     if (this.id) {
-      this.service.update(this.myForm.value, this.id).subscribe(data => { console.log(data); });
+      this.service.update(this.myForm.value, this.id).subscribe(data => {
+        alert('product updated successfully');
+        this.router.navigate(['']);
+      });
     } else {
-      this.service.addProduct(this.myForm.value).subscribe(data => { console.log(data); });
+      this.service.addProduct(this.myForm.value).subscribe(data => {
+        alert( 'product added successfully' ); this.router.navigate(['']);
+      });
     }
 
   }
 
   delete() {
-    this.service.del(this.id).subscribe(data => { console.log(data); });
+    this.service.del(this.id).subscribe(data => {
+      alert('product deleted successfully');
+      this.router.navigate(['']);
+    });
   }
 }

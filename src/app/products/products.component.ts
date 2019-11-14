@@ -13,7 +13,14 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-   // debugger
+    // debugger
+    this.service.getProduct().subscribe(Response => {
+      this.productList = Response;
+      console.log(this.productList, ' this.productList');
+    });
+  }
+
+  deleted(event) {
     this.service.getProduct().subscribe(Response => {
       this.productList = Response;
       console.log(this.productList, ' this.productList');

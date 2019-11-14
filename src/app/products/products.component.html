@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row" *ngIf='productList'>
     <div *ngFor="let item of productList">
-      <app-productdetail [product]='item'></app-productdetail>
+      <app-productdetail [product]='item' (isDeleted)=deleted($event)></app-productdetail>
     </div>
   </div>
 </div>
